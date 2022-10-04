@@ -49,10 +49,10 @@ async def media_receive_handler(_, m: Message):
         rm = None
     await m.reply_text(
         text="FileName 📂: {}\nFileSize 💾:{}\nDowload Link 📥: {}\n{}".format(
-            get_name(m), get_media_file_size(m), short_link, get_size(m)
+            get_name(m), get_media_file_size(m), short_link, humanbytes(get_size(m))
         ),
         quote=True,
         parse_mode=ParseMode.HTML,
         reply_markup=rm,
     )
-    await log_msg.reply_text(text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\nUser ID :- `{m.from_user.id}`\nDownload Link :- {shot_link}")
+    await log_msg.reply_text(text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\nUser ID :- `{m.from_user.id}`\nDownload Link :- {short_link}")
