@@ -121,7 +121,7 @@ HAS_SSL=False
 
 `MULTI_TOKEN2`: Add your second bot token here.
 
-you may also add as many as bots you want. (max limit is not tested yet)
+you may also add as many as bots you want. (max limit is not tested yet,then I will Set it)
 `MULTI_TOKEN3`, `MULTI_TOKEN4`, etc.
 
 ### Optional Vars

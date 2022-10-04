@@ -2,11 +2,13 @@
 # Coding : Jyothis Jayanth [@EverythingSuckz]
 
 import logging
+from WebStreamer.utils.file_properties import get_size
 from pyrogram import filters
 from WebStreamer.vars import Var
 from urllib.parse import quote_plus
 from WebStreamer.bot import StreamBot
 from WebStreamer.utils import get_hash, get_name
+from WebStreamer.utils.human_readable import humanbytes
 from pyrogram.enums.parse_mode import ParseMode
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 
@@ -35,15 +37,22 @@ async def media_receive_handler(_, m: Message):
     rm = InlineKeyboardMarkup(
         [[InlineKeyboardButton("Open", url=stream_link)]]
     )
+    def get_media_file_size(m):
+        media = m.video or m.audio or m.document
+        if media and media.file_size:
+            return media.file_size
+        else:
+            return None
+
     if Var.FQDN == Var.BIND_ADDRESS:
         # dkabl
         rm = None
     await m.reply_text(
-        text="<code>{}</code>\n(<a href='{}'>shortened</a>)".format(
-            stream_link, short_link
+        text="FileName 📂: {}\nFileSize 💾:{}\nDowload Link 📥: {}\n{}".format(
+            get_name(m), get_media_file_size(m), short_link, get_size(m)
         ),
         quote=True,
         parse_mode=ParseMode.HTML,
         reply_markup=rm,
     )
-    await log_msg.reply_text(text=f"𝚁𝙴𝚀𝚄𝙴𝚂𝚃𝙴𝙳 𝙱𝚈 [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**𝚄𝚂𝙴𝚁 𝙸𝙳 :-** `{m.from_user.id}`\n**𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙻𝙸𝙽𝙺 :- ** {stream_link}")
+    await log_msg.reply_text(text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\nUser ID :- `{m.from_user.id}`\nDownload Link :- {shot_link}")
