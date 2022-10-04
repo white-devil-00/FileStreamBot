@@ -9,5 +9,5 @@ from WebStreamer.bot import StreamBot
 @StreamBot.on_message(filters.command(["start", "help"]))
 async def start(_, m: Message):
     await m.reply(
-        f'__Hi {m.from_user.mention(style="md")},__ **__I\'m File to Link Bot__**\nz**Send me a file to get an instant stream link.**"'
+        f'__Hi {m.from_user.mention(style="md")}, I\'m File to Link Bot__\n**__Send me a file to get an instant stream link ...__**'
     )

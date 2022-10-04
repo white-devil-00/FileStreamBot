@@ -37,22 +37,17 @@ async def media_receive_handler(_, m: Message):
     rm = InlineKeyboardMarkup(
         [[InlineKeyboardButton("Open", url=stream_link)]]
     )
-    def get_media_file_size(m):
-        media = m.video or m.audio or m.document
-        if media and media.file_size:
-            return media.file_size
-        else:
-            return None
+    
 
     if Var.FQDN == Var.BIND_ADDRESS:
         # dkabl
         rm = None
     await m.reply_text(
-        text="FileName 📂: {}\nFileSize 💾:{}\nDowload Link 📥: {}\n{}".format(
-            get_name(m), get_media_file_size(m), short_link, humanbytes(get_size(m))
+        text="**𝙵𝚒𝚕𝚎𝙽𝚊𝚖𝚎 📂: {}\n𝙵𝚒𝚕𝚎𝚂𝚒𝚣𝚎 💾:{}\n𝙳𝚘𝚠𝚗𝚕𝚘𝚊𝚍 𝙻𝚒𝚗𝚔 📥: {}**".format(
+            get_name(m), humanbytes(get_size(m)), short_link
         ),
         quote=True,
         parse_mode=ParseMode.HTML,
         reply_markup=rm,
     )
-    await log_msg.reply_text(text=f"Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\nUser ID :- `{m.from_user.id}`\nDownload Link :- {short_link}")
+    await log_msg.reply_text(text=f"**Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\nUser ID :- `{m.from_user.id}`\nDownload Link :- {short_link}***")
