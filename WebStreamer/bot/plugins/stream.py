@@ -2,18 +2,16 @@
 # Coding : Jyothis Jayanth [@EverythingSuckz]
 
 import logging
-import urllib.parse
+import asyncio
 from pyrogram import filters, Client
 from WebStreamer.vars import Var
 from urllib.parse import quote_plus
 from WebStreamer.bot import StreamBot
-from WebStreamer.utils import get_hash, get_name
-from WebStreamer.utils.file_properties import get_size
+from WebStreamer.utils import get_hash, get_name, get_size
 from WebStreamer.utils.human_readable import humanbytes
 from pyrogram.enums.parse_mode import ParseMode
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import FloodWait, UserNotParticipant
-import asyncio
 
 
 
@@ -35,10 +33,10 @@ async def private_receive_handler(c: Client, m: Message):
     if Var.UPDATES_CHANNEL != "None":
         try:
             user = await c.get_chat_member(Var.UPDATES_CHANNEL, m.chat.id)
-            if user.status == "banned":
+            if user.status == "BANNED":
                 await c.send_message(
                     chat_id=m.chat.id,
-                    text="**𝚈𝙾𝚄 𝙰𝚁𝙴 𝙱𝙰𝙽𝙽𝙴𝙳../**",
+                    text=f"**𝚈𝙾𝚄 𝙰𝚁𝙴 𝙱𝙰𝙽𝙽𝙴𝙳../**",
                     parse_mode="Markdown",
                     disable_web_page_preview=True
                 )
