@@ -37,9 +37,7 @@ async def media_receive_handler(c: Client, m: Message):
             if user.status == "kicked":
                 await c.send_message(
                     chat_id=m.chat.id,
-                    text="**𝚈𝙾𝚄 𝙰𝚁𝙴 𝙱𝙰𝙽𝙽𝙴𝙳...**",
-                    parse_mode="markdown",
-                    disable_web_page_preview=True
+                    text="**𝚈𝙾𝚄 𝙰𝚁𝙴 𝙱𝙰𝙽𝙽𝙴𝙳...**"
                 )
                 return
         except UserNotParticipant:
@@ -52,16 +50,13 @@ async def media_receive_handler(c: Client, m: Message):
                             InlineKeyboardButton("𝙹𝙾𝙸𝙽 𝚄𝙿𝙳𝙰𝚃𝙴𝚉 𝙲𝙷𝙰𝙽𝙽𝙴𝙻", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
                         ]
                     ]
-                ),
-                parse_mode="markdown"
+                )
             )
             return
         except Exception:
             await c.send_message(
                 chat_id=m.chat.id,
-                text="**𝙰𝙳𝙳 𝙵𝙾𝚁𝙲𝙴 𝚂𝚄𝙱 𝚃𝙾 𝙰𝙽𝚈 𝙲𝙷𝙰𝙽𝙽𝙴𝙻**",
-                parse_mode="markdown",
-                disable_web_page_preview=True)
+                text="**𝙰𝙳𝙳 𝙵𝙾𝚁𝙲𝙴 𝚂𝚄𝙱 𝚃𝙾 𝙰𝙽𝚈 𝙲𝙷𝙰𝙽𝙽𝙴𝙻**")
             return
     try:
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
