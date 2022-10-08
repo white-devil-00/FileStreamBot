@@ -5,7 +5,7 @@ from pyrogram import filters
 from pyrogram.types import Message
 from WebStreamer.bot import StreamBot
 from WebStreamer.vars import Var
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.types import User, Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import FloodWait, UserNotParticipant
 
 
@@ -14,7 +14,7 @@ async def start(c, m: Message):
     if Var.UPDATES_CHANNEL != "None":
         try:
             user = await c.get_chat_member(Var.UPDATES_CHANNEL, m.chat.id)
-            if user.status() == "BANNED":
+            if user.status == "BANNED":
                 await c.send_message(
                     chat_id=m.chat.id,
                     text=f"**𝚈𝙾𝚄 𝙰𝚁𝙴 𝙱𝙰𝙽𝙽𝙴𝙳../**"
