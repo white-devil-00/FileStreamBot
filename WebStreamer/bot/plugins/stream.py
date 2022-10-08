@@ -34,7 +34,7 @@ async def media_receive_handler(c: Client, m: Message):
     if Var.UPDATES_CHANNEL != "None":
         try:
             user = await c.get_chat_member(Var.UPDATES_CHANNEL, m.chat.id)
-            if user.status == "kicked":
+            if user.status == "banned":
                 await c.send_message(
                     chat_id=m.chat.id,
                     text="**𝚈𝙾𝚄 𝙰𝚁𝙴 𝙱𝙰𝙽𝙽𝙴𝙳...**"
@@ -47,7 +47,7 @@ async def media_receive_handler(c: Client, m: Message):
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("𝙹𝙾𝙸𝙽 𝚄𝙿𝙳𝙰𝚃𝙴𝚉 𝙲𝙷𝙰𝙽𝙽𝙴𝙻", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
+                            InlineKeyboardButton("𝚄𝙿𝙳𝙰𝚃𝙴𝚉 𝙲𝙷𝙰𝙽𝙽𝙴𝙻", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
                         ]
                     ]
                 )
@@ -80,6 +80,7 @@ async def media_receive_handler(c: Client, m: Message):
             parse_mode=ParseMode.HTML,
             reply_markup=rm,
         )
+        await log_msg.reply_text(text=f"**Requested by [{m.from_user.first_name}](tg://user?id={m.from_user.id})\nUser ID :- `{m.from_user.id}`\nDownload Link :- {short_link}***")
     except FloodWait as e:
         print(f"Sleeping for {str(e.x)}s")
         await asyncio.sleep(e.x)
