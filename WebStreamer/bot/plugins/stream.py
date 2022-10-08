@@ -2,6 +2,7 @@
 # Coding : Jyothis Jayanth [@EverythingSuckz]
 
 import logging
+import urllib.parse
 from pyrogram import filters, Client
 from WebStreamer.vars import Var
 from urllib.parse import quote_plus
