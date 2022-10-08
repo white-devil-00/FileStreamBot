@@ -6,7 +6,7 @@ from pyrogram import filters, Client
 from WebStreamer.vars import Var
 from urllib.parse import quote_plus
 from WebStreamer.bot import StreamBot
-from WebStreamer.utils import get_hash, get_name, get_size
+from WebStreamer.utils import get_hash, get_name
 from WebStreamer.utils.file_properties import get_size
 from WebStreamer.utils.human_readable import humanbytes
 from pyrogram.enums.parse_mode import ParseMode
@@ -31,7 +31,7 @@ import asyncio
     group=4,
 )
 async def media_receive_handler(c: Client, m: Message):
-    if Var.UPDATES_CHANNEL != "None":
+    """if Var.UPDATES_CHANNEL != "None":
         try:
             user = await c.get_chat_member(Var.UPDATES_CHANNEL, m.chat.id)
             if user.status == "kicked":
@@ -62,7 +62,7 @@ async def media_receive_handler(c: Client, m: Message):
                 text="**𝙰𝙳𝙳 𝙵𝙾𝚁𝙲𝙴 𝚂𝚄𝙱 𝚃𝙾 𝙰𝙽𝚈 𝙲𝙷𝙰𝙽𝙽𝙴𝙻**",
                 parse_mode="markdown",
                 disable_web_page_preview=True)
-            return
+            return"""
     try:
         log_msg = await m.forward(chat_id=Var.BIN_CHANNEL)
         stream_link = f"{Var.URL}{log_msg.id}/{quote_plus(get_name(m))}?hash={get_hash(log_msg)}"
