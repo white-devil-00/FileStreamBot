@@ -36,7 +36,7 @@ async def media_receive_handler(_, m: Message):
     logging.info(f"Generated link: {stream_link} for {m.from_user.first_name}")
     filesize=humanbytes(get_size(m))
     rm = InlineKeyboardMarkup(
-        [[InlineKeyboardButton("Ｄｏｗｎｌｏａｄ 🔗[{filesize}]", url=stream_link)]]
+        [[InlineKeyboardButton("Ｄｏｗｎｌｏａｄ 🔗", url=stream_link)]]
     )
     
 
