@@ -51,8 +51,7 @@ async def private_receive_handler(c: Client, m: Message):
                             InlineKeyboardButton("𝙹𝙾𝙸𝙽 𝚄𝙿𝙳𝙰𝚃𝙴𝚉 𝙲𝙷𝙰𝙽𝙽𝙴𝙻", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
                         ]
                     ]
-                ),
-                parse_mode="Markdown"
+                )
             )
             return
         except Exception:
