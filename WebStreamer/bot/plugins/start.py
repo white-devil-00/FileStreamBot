@@ -4,10 +4,43 @@
 from pyrogram import filters
 from pyrogram.types import Message
 from WebStreamer.bot import StreamBot
+from WebStreamer.vars import Var
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.errors import FloodWait, UserNotParticipant
 
 
 @StreamBot.on_message(filters.command(["start","Start"]))
-async def start(_, m: Message):
+async def start(c, m: Message):
+    if Var.UPDATES_CHANNEL != "None":
+        try:
+            user = await c.get_chat_member(Var.UPDATES_CHANNEL, m.chat.id)
+            if user.status() == "BANNED":
+                await c.send_message(
+                    chat_id=m.chat.id,
+                    text=f"**𝚈𝙾𝚄 𝙰𝚁𝙴 𝙱𝙰𝙽𝙽𝙴𝙳../**"
+                )
+                return
+        except UserNotParticipant:
+            await c.send_message(
+                chat_id=m.chat.id,
+                    text="**𝙹𝙾𝙸𝙽 𝚃𝙷𝙴 𝚄𝙿𝙳𝙰𝚃𝙴 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 𝚃𝙾 𝚄𝚂𝙴 𝚃𝙷𝙸𝚂 𝙱𝙾𝚃..**\n**𝙱𝙴𝙲𝙰𝚄𝚂𝙴 𝚃𝙷𝙸𝚂 𝙸𝚂 𝙰 𝚃𝙴𝚂𝚃 𝙱𝙾𝚃!**",
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton("𝙹𝙾𝙸𝙽 𝚄𝙿𝙳𝙰𝚃𝙴𝚉 𝙲𝙷𝙰𝙽𝙽𝙴𝙻", url=f"https://t.me/{Var.UPDATES_CHANNEL}")
+                        ]
+                    ]
+                )
+            )
+            return
+        except Exception:
+            await c.send_message(
+                chat_id=m.chat.id,
+                text="**𝙰𝙳𝙳 𝙵𝙾𝚁𝙲𝙴 𝚂𝚄𝙱 𝚃𝙾 𝙰𝙽𝚈 𝙲𝙷𝙰𝙽𝙽𝙴𝙻**",
+                parse_mode="Markdown",
+                disable_web_page_preview=True)
+            return
+
     await m.reply(
         f'__Hi {m.from_user.mention(style="md")}, I\'m File to Link Bot__\n**__Send me a file to get an instant stream link ...__**'
     )

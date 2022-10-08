@@ -37,9 +37,7 @@ async def private_receive_handler(c: Client, m: Message):
             if user.status() == "BANNED":
                 await c.send_message(
                     chat_id=m.chat.id,
-                    text=f"**𝚈𝙾𝚄 𝙰𝚁𝙴 𝙱𝙰𝙽𝙽𝙴𝙳../**",
-                    parse_mode="Markdown",
-                    disable_web_page_preview=True
+                    text=f"**𝚈𝙾𝚄 𝙰𝚁𝙴 𝙱𝙰𝙽𝙽𝙴𝙳../**"
                 )
                 return
         except UserNotParticipant:
