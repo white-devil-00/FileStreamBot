@@ -30,7 +30,7 @@ import asyncio
     ),
     group=4,
 )
-async def media_receive_handler(c, m: Message):
+async def private_receive_handler(c: Client, m: Message):
     if Var.UPDATES_CHANNEL != "None":
         try:
             user = await c.get_chat_member(Var.UPDATES_CHANNEL, m.chat.id)
