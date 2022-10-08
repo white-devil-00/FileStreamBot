@@ -63,6 +63,8 @@ async def private_receive_handler(c: Client, m: Message):
         stream_link = f"{Var.URL}{log_msg.id}/{quote_plus(get_name(m))}?hash={get_hash(log_msg)}"
         short_link = f"{Var.URL}{get_hash(log_msg)}{log_msg.id}"
         logging.info(f"Generated link: {stream_link} for {m.from_user.first_name}")
+        logging.info(f"{user.status}")
+        logging.info(f"{user}")
         filesize=humanbytes(get_size(m))
         rm = InlineKeyboardMarkup(
             [[InlineKeyboardButton("Ｄｏｗｎｌｏａｄ 🔗", url=stream_link)]]
