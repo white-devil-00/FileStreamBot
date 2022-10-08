@@ -10,7 +10,7 @@ from pyrogram.errors import FloodWait, UserNotParticipant
 
 
 @StreamBot.on_message(filters.command(["start","Start"]))
-async def start(c, m: Message):
+async def start(c, m):
     if Var.UPDATES_CHANNEL != "None":
         try:
             user = await c.get_chat_member(Var.UPDATES_CHANNEL, m.chat.id)
