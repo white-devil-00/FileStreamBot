@@ -7,6 +7,7 @@ from WebStreamer.vars import Var
 from urllib.parse import quote_plus
 from WebStreamer.bot import StreamBot
 from WebStreamer.utils import get_hash, get_name, get_size
+from WebStreamer.utils.file_properties import get_size
 from WebStreamer.utils.human_readable import humanbytes
 from pyrogram.enums.parse_mode import ParseMode
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
@@ -29,7 +30,7 @@ import asyncio
     ),
     group=4,
 )
-async def media_receive_handler(_, m: Message, c: Client):
+async def media_receive_handler(c: Client, m: Message):
     if Var.UPDATES_CHANNEL != "None":
         try:
             user = await c.get_chat_member(Var.UPDATES_CHANNEL, m.chat.id)
