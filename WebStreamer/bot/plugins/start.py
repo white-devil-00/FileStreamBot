@@ -1,38 +1,111 @@
 # This file is a part of TG-FileStreamBot
 # Coding : Jyothis Jayanth [@EverythingSuckz]
 
+from multiprocessing.connection import Client
+from ...vars import Var
 from pyrogram import filters
 from pyrogram.types import Message
 from WebStreamer.bot import StreamBot
+from WebStreamer.utils.database import Ban_List
+ban = Ban_List(Var.DATABASE_URL, Var.SESSION_NAME)
 
 
 @StreamBot.on_message(filters.command(["start","Start"]))
-async def start(_, m: Message):
-    await m.reply(
-        f'__Hi {m.from_user.mention(style="md")}, I\'m File to Link Bot__\n**__Send me a file to get an instant stream link ...__**'
-    )
+async def start(b: Client, m: Message):
+    if  await ban.is_user_exist(m.from_user.id):
+        await m.reply(
+            f'__Mr.{m.from_user.first_name},__'
+                    )
+        await m.reply(
+            f'**Ｙｏｕ＇ｒｅ Ｂａｎｎｅｄ ．．．**'
+                    )
+    else:
+        await m.reply(
+            f'__Hi {m.from_user.mention(style="md")}, I\'m File to Link Bot__\n**__Send me a file to get an instant stream link ...__**'
+        )
 
 @StreamBot.on_message(filters.command(["help","Help"]))
 async def help_menu(_, m: Message):
-    await m.reply_text(
-        text="**┣⪼ 𝚂𝙴𝙽𝙳 𝙼𝙴 𝙰𝙽𝚈 𝙵𝙸𝙻𝙴/𝚅𝙸𝙳𝙴𝙾 𝚃𝙷𝙴𝙽 𝙸 𝚆𝙸𝙻𝙻 𝙶𝙸𝚅𝙴 𝚈𝙾𝚄 𝙿𝙴𝚁𝙼𝙰𝙽𝙴𝙽𝚃 𝚂𝙷𝙰𝚁𝙰𝙱𝙻𝙴 𝙻𝙸𝙽𝙺 𝙾𝙵 𝙸𝚃...\n\n┣⪼ 𝚃𝙷𝙸𝚂 𝙻𝙸𝙽𝙺 𝙲𝙰𝙽 𝙱𝙴 𝚄𝚂𝙴𝙳 𝚃𝙾 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙾𝚁 𝚃𝙾 𝚂𝚃𝚁𝙴𝙰𝙼 𝚄𝚂𝙸𝙽𝙶 𝙴𝚇𝚃𝙴𝚁𝙽𝙰𝙻 𝚅𝙸𝙳𝙴𝙾 𝙿𝙻𝙰𝚈𝙴𝚁𝚂 𝚃𝙷𝚁𝙾𝚄𝙶𝙷 𝙼𝚈 𝚂𝙴𝚁𝚅𝙴𝚁.\n\n┣⪼ 𝙵𝙾𝚁 𝚂𝚃𝚁𝙴𝙰𝙼𝙸𝙽𝙶 𝙹𝚄𝚂𝚃 𝙲𝙾𝙿𝚈 𝚃𝙷𝙴 𝙻𝙸𝙽𝙺 𝙰𝙽𝙳 𝙿𝙰𝚂𝚃𝙴 𝙸𝚃 𝙸𝙽 𝚈𝙾𝚄𝚁 𝚅𝙸𝙳𝙴𝙾 𝙿𝙻𝙰𝚈𝙴𝚁 𝚃𝙾 𝚂𝚃𝙰𝚁𝚃 𝚂𝚃𝚁𝙴𝙰𝙼𝙸𝙽𝙶.\n\n┣⪼ 𝚃𝙷𝙸𝚂 𝙱𝙾𝚃 𝙸𝚂 𝙰𝙻𝚂𝙾 𝚂𝚄𝙿𝙿𝙾𝚁𝚃 𝙸𝙽 𝙲𝙷𝙰𝙽𝙽𝙴𝙻𝚂. 𝙰𝙳𝙳 𝙼𝙴 𝚃𝙾 𝚈𝙾𝚄𝚁 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 𝙰𝚂 𝙰𝙳𝙼𝙸𝙽 𝚃𝙾 𝙶𝙴𝚃 𝚁𝙴𝙰𝙻𝚃𝙸𝙼𝙴 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙻𝙸𝙽𝙺 𝙵𝙾𝚁 𝙴𝚅𝙴𝚁𝚈 𝙵𝙸𝙻𝙴/𝚅𝙸𝙳𝙴𝙾 𝙿𝙾𝚂𝚃../\n\n┣⪼ 𝙵𝙾𝚁 𝙼𝙾𝚁𝙴 𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝚃𝙸𝙾𝙽 :- /about\n**", 
-  parse_mode="Markdown",
-        disable_web_page_preview=True
-    )
+    if  await ban.is_user_exist(m.from_user.id):
+        await m.reply(
+            f'__Mr.{m.from_user.first_name},__'
+                    )
+        await m.reply(
+            f'**Ｙｏｕ＇ｒｅ Ｂａｎｎｅｄ ．．．**'
+                    )
+    else:
+        await m.reply_text(
+            text="**┣⪼ ᴊᴜꜱᴛ ᴀ ꜱᴇɴᴅ ᴍᴇ ᴀ ꜰɪʟᴇ/ᴠɪᴅᴇᴏ, ɪ'ᴡɪʟʟ ɢɪᴠᴇ ʏᴏᴜ ᴀ ᴅɪʀᴇᴄᴛ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ...\n\n┣⪼ ʏᴏᴜ ᴄᴀɴ ᴀʟꜱᴏ ᴜꜱᴇ ᴛʜᴇ ꜱᴀᴍᴇ ʟɪɴᴋ ꜰᴏʀ ꜱᴛʀᴇᴀᴍɪɴɢ\n\n┣⪼ ꜰᴏʀ ꜱᴜᴘᴘᴏʀᴛ : @F2LSupport\n\n┣⪼ ʙᴏᴛ ᴇᴛʜᴜᴍ ᴍᴀᴋᴋᴀʀ ᴘᴀɴɴᴜᴄʜᴜɴᴀ,\nᴄᴏᴍᴘᴀɴʏ ᴘᴏʀᴜᴘɪʟʟᴀ 🙄**", 
+            disable_web_page_preview=True
+        )
 
 @StreamBot.on_message(filters.command(["about","About"]))
 async def help_menu(_, m: Message):
-    await m.reply_text(
-        text="""<b>𝚂𝙾𝙼𝙴𝚃𝙷𝙸𝙽𝙶 𝙰𝙱𝙾𝚄𝚃 𝙼𝙴</b>
+    if  await ban.is_user_exist(m.from_user.id):
+        await m.reply(
+            f'__Mr.{m.from_user.first_name},__'
+                    )
+        await m.reply(
+            f'**Ｙｏｕ＇ｒｅ Ｂａｎｎｅｄ ．．．**'
+                    )
+    else:
+        await m.reply_text(
+            text="""<b>𝚂𝙾𝙼𝙴𝚃𝙷𝙸𝙽𝙶 𝙰𝙱𝙾𝚄𝚃 𝙼𝙴</b>
 
-<b>╭━━━━━━━〔𝙵𝙸𝙻𝙴-𝚃𝙾-𝙻𝙸𝙽𝙺 𝙱𝙾𝚃〕</b>
-┃
-┣⪼<b>𝙲𝚁𝙴𝙰𝚃𝙾𝚁-𝙽𝙰𝙼𝙴   : 𝚆𝙷𝙸𝚃𝙴 𝙳𝙴𝚅𝙸𝙻</b>
-┣⪼<b>𝚂𝙴𝚁𝚅𝙴𝚁         : 𝙷𝙴𝚁𝚄𝙺𝙾</b>
-┣⪼<b>𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴       : 𝙿𝚈𝚃𝙷𝙾𝙽 3</b>
-┣⪼<b>𝚂𝙾𝚄𝚁𝙲𝙴-𝙲𝙾𝙳𝙴    : <a href='https://NaKule.Setha.Payele'>𝙵𝙸𝙻𝙴-𝚃𝙾-𝙻𝙸𝙽𝙺</a></b>
-┃
-<b>╰━━━━━━━〔𝚂𝚄𝙿𝙿𝙾𝚁𝚃 𝚄𝚂〕</b>""",
-  parse_mode="html",
-        disable_web_page_preview=True
-    )
+    <b>╭━━━━━━━〔𝙵𝙸𝙻𝙴-𝚃𝙾-𝙻𝙸𝙽𝙺 𝙱𝙾𝚃〕</b>
+    ┃
+    ┣⪼<b>𝙲𝚁𝙴𝙰𝚃𝙾𝚁-𝙽𝙰𝙼𝙴   : 𝚆𝙷𝙸𝚃𝙴 𝙳𝙴𝚅𝙸𝙻</b>
+    ┣⪼<b>𝚂𝙴𝚁𝚅𝙴𝚁         : 𝙷𝙴𝚁𝚄𝙺𝙾</b>
+    ┣⪼<b>𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴       : 𝙿𝚈𝚃𝙷𝙾𝙽 3</b>
+    ┣⪼<b>𝚂𝙾𝚄𝚁𝙲𝙴-𝙲𝙾𝙳𝙴    : <a href='https://NaKule.Setha.Payele'>𝙵𝙸𝙻𝙴-𝚃𝙾-𝙻𝙸𝙽𝙺</a></b>
+    ┃
+    <b>╰━━━━━━━〔𝚂𝚄𝙿𝙿𝙾𝚁𝚃 𝚄𝚂〕</b>""",
+            disable_web_page_preview=True
+        )
+
+#Ban Feature Commands
+@StreamBot.on_message(filters.command('add') & filters.private & filters.user(Var.OWNER_ID))
+async def start(b, m):
+    banid = m.reply_to_message.text
+    if  await ban.is_user_exist(banid):
+        await b.send_message(
+                        chat_id=m.chat.id,
+                        text="**__User is Already Banned !__**"
+                    )
+        return
+    else:
+        await ban.add_user(str(banid))
+        await b.send_message(
+            Var.BIN_CHANNEL,
+            f"#Ban\nUser id : {banid} is Banned by [{m.from_user.first_name}](tg://user?id={m.from_user.id})!"
+        )
+        await b.send_message(
+                        chat_id=m.chat.id,
+                        text=f"__Banned - {banid} !__"
+                    )
+
+@StreamBot.on_message(filters.command('clear') & filters.private & filters.user(Var.OWNER_ID) )
+async def start(b, m):
+    banid=m.reply_to_message.text
+    if  await ban.is_user_exist(banid):
+        await ban.delete_user(banid)
+        await b.send_message(
+                        chat_id=m.chat.id,
+                        text=f"**__Unbanned - {banid} :)__**"
+                    )
+        await b.send_message(
+                Var.BIN_CHANNEL,
+                f"#Banned User id : {banid} unbanned by [{m.from_user.first_name}](tg://user?id={m.from_user.id})!"
+            )
+        return
+    else:
+        await b.send_message(
+                        chat_id=m.chat.id,
+                        text=f"**__User is Not Banned__** 😶"
+                    )
+
+@StreamBot.on_message(filters.command('ban_list') & filters.private )
+async def BanList(b,m):
+    total_users = await ban.total_users_count()
+    await m.reply_text(text=f"**Total No.Of Users Banned : ** `{total_users}`")
+    return
