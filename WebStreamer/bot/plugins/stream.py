@@ -45,7 +45,6 @@ async def media_receive_handler(_, m: Message):
         stream_link = f"{Var.URL}{log_msg.id}/{quote_plus(get_name(m))}?hash={get_hash(log_msg)}"
         short_link = f"{Var.URL}{get_hash(log_msg)}{log_msg.id}"
         logging.info(f"Generated link: {stream_link} for {m.from_user.first_name}")
-        filesize=humanbytes(get_size(m))
         rm = InlineKeyboardMarkup(
             [[InlineKeyboardButton("Ｄｏｗｎｌｏａｄ 🔗", url=stream_link)]]
         )
@@ -55,8 +54,13 @@ async def media_receive_handler(_, m: Message):
             # dkabl
             rm = None
         await m.reply_text(
-            text="<b>📂 𝙵𝚒𝚕𝚎𝙽𝚊𝚖𝚎 : \n{}\n💾 𝙵𝚒𝚕𝚎𝚂𝚒𝚣𝚎 : {}\n📥 𝙳𝚘𝚠𝚗𝚕𝚘𝚊𝚍 𝙻𝚒𝚗𝚔 : {}</b>".format(
-                get_name(m), filesize, short_link
+            text="""
+<b>📧 ғɪʟᴇ ɴᴀᴍᴇ :- </b> <i><b>{}</b></i>
+
+<b>📦 ғɪʟᴇ sɪᴢᴇ :- </b> <i><b>{}</b></i>
+
+<b>💌 ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ :- </b> <i><b>{}</b></i>""".format(
+                get_name(m), humanbytes(get_size(m)), short_link
             ),
             quote=True,
             parse_mode=ParseMode.HTML,
