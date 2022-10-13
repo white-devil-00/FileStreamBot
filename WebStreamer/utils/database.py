@@ -41,14 +41,15 @@ class Ban_List:
         self.db = self._client[database_name]
         self.col = self.db.ban
 
-    def new_user(self, id):
+    def new_user(self, id, uid, name):
         return dict(
             id=id,
-            Banned_on=datetime.date.today().isoformat()
+            Banned_on=datetime.date.today().isoformat(),
+            Banned_by=name+"-"+uid
         )
 
-    async def add_user(self, id):
-        user = self.new_user(int(id))
+    async def add_user(self, id, uid, name):
+        user = self.new_user(int(id),str(uid),str(name))
         await self.col.insert_one(user)
 
     async def is_user_exist(self, id):

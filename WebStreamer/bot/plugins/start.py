@@ -64,38 +64,38 @@ async def help_menu(_, m: Message):
         )
 
 #Ban Feature Commands
-@StreamBot.on_message(filters.command('add') & filters.private & filters.user(Var.OWNER_ID))
+@StreamBot.on_message(filters.command(["ban","Ban","gfo"]) & filters.private & filters.user(Var.OWNER_ID))
 async def start(b, m):
-    banid = m.reply_to_message.text
-    if  await ban.is_user_exist(banid):
+    id = m.text.split()[1]
+    if  await ban.is_user_exist(id):
         await b.send_message(
                         chat_id=m.chat.id,
                         text="**__User is Already Banned !__**"
                     )
         return
     else:
-        await ban.add_user(str(banid))
+        await ban.add_user(id,m.from_user.id,m.from_user.first_name)
         await b.send_message(
             Var.BIN_CHANNEL,
-            f"#Ban\nUser id : {banid} is Banned by [{m.from_user.first_name}](tg://user?id={m.from_user.id})!"
+            f"#Ban\nUser id : {id} is Banned by [{m.from_user.first_name}](tg://user?id={m.from_user.id})!"
         )
         await b.send_message(
                         chat_id=m.chat.id,
-                        text=f"__Banned - {banid} !__"
+                        text=f"__Banned - {id} !__"
                     )
 
-@StreamBot.on_message(filters.command('clear') & filters.private & filters.user(Var.OWNER_ID) )
+@StreamBot.on_message(filters.command(["unban","Unban","CB"]) & filters.private & filters.user(Var.OWNER_ID) )
 async def start(b, m):
-    banid=m.reply_to_message.text
-    if  await ban.is_user_exist(banid):
-        await ban.delete_user(banid)
+    id=m.text.split()[1]
+    if  await ban.is_user_exist(id):
+        await ban.delete_user(id)
         await b.send_message(
                         chat_id=m.chat.id,
-                        text=f"**__Unbanned - {banid} :)__**"
+                        text=f"**__Unbanned - {id} :)__**"
                     )
         await b.send_message(
                 Var.BIN_CHANNEL,
-                f"#Banned User id : {banid} unbanned by [{m.from_user.first_name}](tg://user?id={m.from_user.id})!"
+                f"#Banned User id : {id} unbanned by [{m.from_user.first_name}](tg://user?id={m.from_user.id})!"
             )
         return
     else:
@@ -105,7 +105,7 @@ async def start(b, m):
                     )
 
 @StreamBot.on_message(filters.command('ban_list') & filters.private )
-async def BanList(b,m):
+async def BanList(_,m):
     total_users = await ban.total_users_count()
     await m.reply_text(text=f"**Total No.Of Users Banned : ** `{total_users}`")
     return
