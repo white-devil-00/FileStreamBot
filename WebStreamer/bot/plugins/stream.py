@@ -34,8 +34,12 @@ ban = Ban_List(Var.DATABASE_URL, Var.SESSION_NAME)
 )
 async def media_receive_handler(_, m: Message):
     if  await ban.is_user_exist(m.from_user.id):
+        if m.from_user.last_name == None:
+            name=m.from_user.first_name
+        else:
+             name=m.from_user.first_name+" "+m.from_user.last_name
         await m.reply(
-            f'__Mr.{m.from_user.first_name},__'
+            f'__Sorry Mr.{name},__'
                     )
         await m.reply(
             f'**Ｙｏｕ＇ｒｅ Ｂａｎｎｅｄ ．．．**'

@@ -13,8 +13,12 @@ ban = Ban_List(Var.DATABASE_URL, Var.SESSION_NAME)
 @StreamBot.on_message(filters.command(["start","Start"]))
 async def start(b: Client, m: Message):
     if  await ban.is_user_exist(m.from_user.id):
+        if m.from_user.last_name == None:
+            name=m.from_user.first_name
+        else:
+             name=m.from_user.first_name+" "+m.from_user.last_name
         await m.reply(
-            f'__Mr.{m.from_user.first_name},__'
+            f'__Sorry Mr.{name},__'
                     )
         await m.reply(
             f'**Ｙｏｕ＇ｒｅ Ｂａｎｎｅｄ ．．．**'
@@ -27,8 +31,12 @@ async def start(b: Client, m: Message):
 @StreamBot.on_message(filters.command(["help","Help"]))
 async def help_menu(_, m: Message):
     if  await ban.is_user_exist(m.from_user.id):
+        if m.from_user.last_name == None:
+            name=m.from_user.first_name
+        else:
+             name=m.from_user.first_name+" "+m.from_user.last_name
         await m.reply(
-            f'__Mr.{m.from_user.first_name},__'
+            f'__Sorry Mr.{name},__'
                     )
         await m.reply(
             f'**Ｙｏｕ＇ｒｅ Ｂａｎｎｅｄ ．．．**'
@@ -42,8 +50,12 @@ async def help_menu(_, m: Message):
 @StreamBot.on_message(filters.command(["about","About"]))
 async def help_menu(_, m: Message):
     if  await ban.is_user_exist(m.from_user.id):
+        if m.from_user.last_name == None:
+            name=m.from_user.first_name
+        else:
+             name=m.from_user.first_name+" "+m.from_user.last_name
         await m.reply(
-            f'__Mr.{m.from_user.first_name},__'
+            f'__Sorry Mr.{name},__'
                     )
         await m.reply(
             f'**Ｙｏｕ＇ｒｅ Ｂａｎｎｅｄ ．．．**'
@@ -64,7 +76,7 @@ async def help_menu(_, m: Message):
         )
 
 #Ban Feature Commands
-@StreamBot.on_message(filters.command(["ban","Ban","gfo"]) & filters.private & filters.user(Var.OWNER_ID))
+@StreamBot.on_message(filters.command(["ban","Ban","gtfo"]) & filters.private & filters.user(Var.OWNER_ID))
 async def start(b, m):
     id = m.text.split()[1]
     if  await ban.is_user_exist(id):
