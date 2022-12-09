@@ -45,10 +45,9 @@ async def start_services():
     )
     await initialize_clients()
     print("------------------------------ DONE ------------------------------")
-    if Var.ON_HEROKU:
-        print("------------------ Starting Keep Alive Service ------------------")
-        print()
-        asyncio.create_task(utils.ping_server())
+    print("------------------ Starting Keep Alive Service ------------------")
+    print()
+    asyncio.create_task(utils.ping_server())
     print("--------------------- Initalizing Web Server ---------------------")
     await server.setup()
     bind_address = "0.0.0.0" if Var.ON_HEROKU else Var.BIND_ADDRESS
